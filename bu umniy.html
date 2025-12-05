@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kopi Kenangan - Temani Harimu</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-color: #fff9f3;
+        --primary-text: #2b2b2b;
+        --muted-text: #7a6a61;
+        --accent-brown: #8b5e3c;
+        --accent-hover: #6d4a2f;
+        --radius: 16px;
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--bg-color);
+        color: var(--primary-text);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* --- NAVBAR --- */
+      .navbar {
+        position: fixed; top: 0; left: 0; width: 100%;
+        padding: 20px 40px; display: flex; justify-content: space-between; align-items: center;
+        z-index: 1000; transition: all 0.3s ease; background: transparent;
+      }
+      .navbar.scrolled {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 15px 40px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      }
+      .logo-box {
+        background: #d4b898; color: white; padding: 8px 14px;
+        border-radius: 12px; font-weight: 800; font-size: 18px; letter-spacing: 1px;
+      }
+      .nav-links a { margin-left: 25px; text-decoration: none; color: var(--muted-text); font-weight: 500; font-size: 14px; transition: 0.3s; }
+      .nav-links a:hover { color: var(--accent-brown); }
+      .btn-nav {
+        background: var(--accent-brown); color: white !important;
+        padding: 10px 24px; border-radius: 50px; font-weight: 600;
+      }
+      .btn-nav:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(139, 94, 60, 0.3); }
+
+      /* --- LAYOUT UTAMA --- */
+      .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+      
+      /* --- HERO SECTION --- */
+      .hero {
+        padding-top: 150px; padding-bottom: 80px;
+        display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center;
+      }
+      .hero h2 { font-size: 46px; line-height: 1.2; margin-bottom: 20px; color: #1a1a1a; }
+      .hero p { font-size: 16px; color: var(--muted-text); margin-bottom: 30px; max-width: 90%; }
+      .hero-img-wrapper { position: relative; }
+      .hero-img { 
+        width: 100%; height: 500px; object-fit: cover; 
+        border-radius: 30px; 
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1); 
+      }
+      
+      /* Promo Card di Hero */
+      .promo-badge {
+        position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+        background: white; padding: 15px 25px; border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15); width: 80%;
+        display: flex; justify-content: space-between; align-items: center;
+      }
+
+      .btn { padding: 12px 28px; border-radius: 12px; font-weight: 600; cursor: pointer; border: none; transition: 0.3s; }
+      .btn-primary { background: var(--accent-brown); color: white; }
+      .btn-primary:hover { background: var(--accent-hover); box-shadow: 0 8px 20px rgba(139, 94, 60, 0.2); }
+      .btn-outline { background: transparent; border: 1px solid #d4b898; color: var(--accent-brown); margin-left: 10px; }
+      .btn-outline:hover { background: #fdf6f0; }
+
+      /* --- TENTANG KAMI (SECTION INI YANG DIKEMBALIKAN KE VERSI LAMA) --- */
+      .about-section {
+        padding: 80px 0;
+      }
+      .about-container {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+      }
+      .about-img {
+        width: 100%; height: 400px; object-fit: cover; border-radius: 24px;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+      }
+      .subtitle {
+        color: var(--accent-brown); font-weight: 700; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; display: block;
+      }
+      .about-title {
+        font-size: 36px; font-weight: 700; margin-bottom: 20px; line-height: 1.2;
+      }
+      .about-desc {
+        color: var(--muted-text); margin-bottom: 20px; font-size: 16px;
+      }
+
+      /* --- MENU GRID --- */
+      .menu-section { padding: 60px 0 100px; }
+      .section-header { text-align: center; margin-bottom: 50px; }
+      .menu-grid {
+        display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+      }
+      .product-card {
+        background: white; border-radius: 20px; padding: 18px;
+        border: 1px solid rgba(0,0,0,0.03); transition: all 0.3s;
+        display: flex; flex-direction: column;
+      }
+      .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(139, 94, 60, 0.1); }
+      .product-img {
+        width: 100%; height: 220px; object-fit: cover; border-radius: 16px; margin-bottom: 18px;
+      }
+      .product-name { font-size: 18px; font-weight: 700; margin-bottom: 5px; }
+      .product-price { color: var(--accent-brown); font-weight: 700; font-size: 16px; margin-bottom: 20px; }
+      
+      /* Tombol di kartu produk */
+      .card-actions { display: flex; gap: 10px; margin-top: auto; }
+      .btn-detail {
+        flex: 1; background: transparent; border: 1px solid #e0e0e0;
+        color: var(--muted-text); padding: 10px; border-radius: 10px; cursor: pointer; font-weight: 600; transition: 0.2s;
+      }
+      .btn-detail:hover { border-color: var(--accent-brown); color: var(--accent-brown); }
+      .btn-pesan-card {
+        flex: 1; background: var(--accent-brown); color: white; border: none;
+        padding: 10px; border-radius: 10px; cursor: pointer; font-weight: 600; transition: 0.2s;
+      }
+      .btn-pesan-card:hover { background: var(--accent-hover); }
+
+      /* --- MODAL (PESAN & DETAIL) --- */
+      .modal-backdrop {
+        position: fixed; inset: 0; background: rgba(20, 10, 5, 0.6);
+        backdrop-filter: blur(8px); z-index: 2000;
+        display: none; align-items: center; justify-content: center;
+        opacity: 0; transition: opacity 0.3s;
+      }
+      .modal-backdrop.active { display: flex; opacity: 1; }
+      
+      .modal-content {
+        background: white; width: 90%; max-width: 480px; padding: 30px;
+        border-radius: 24px; position: relative;
+        transform: scale(0.95); transition: transform 0.3s;
+        max-height: 90vh; overflow-y: auto; box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+      }
+      .modal-backdrop.active .modal-content { transform: scale(1); }
+
+      .close-btn {
+        position: absolute; top: 20px; right: 20px;
+        background: #f5f5f5; border: none; width: 32px; height: 32px;
+        border-radius: 50%; cursor: pointer; font-size: 16px; 
+        display: flex; align-items: center; justify-content: center; color: #666; transition: 0.2s;
+      }
+      .close-btn:hover { background: #e0e0e0; color: #ff4d4d; }
+
+      /* Detail Modal Styling */
+      .detail-img-large { width: 100%; height: 260px; object-fit: cover; border-radius: 16px; margin-bottom: 20px; }
+      .detail-desc { color: var(--muted-text); font-size: 15px; line-height: 1.6; margin: 15px 0 25px; }
+
+      /* Form Style */
+      .form-group { margin-bottom: 15px; }
+      .form-input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; margin-top: 5px; outline: none; }
+      .form-input:focus { border-color: var(--accent-brown); }
+
+      /* Footer */
+      footer { text-align: center; padding: 40px; border-top: 1px solid rgba(0,0,0,0.05); color: var(--muted-text); margin-top: 20px; }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .navbar { padding: 15px 20px; }
+        .hero, .about-container { grid-template-columns: 1fr; text-align: center; }
+        .hero { padding-top: 100px; gap: 30px; }
+        .hero-img { height: 350px; }
+        .nav-links { display: none; }
+        .about-title { font-size: 28px; }
+        .promo-badge { width: 90%; font-size: 12px; }
+        .about-section { padding: 40px 0; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <nav class="navbar" id="navbar">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div class="logo-box">KK</div>
+        <h1 style="font-size: 18px; color: var(--primary-text); font-weight: 700;">Kopi Kenangan</h1>
+      </div>
+      <div class="nav-links">
+        <a href="#about">Tentang Kami</a>
+        <a href="#menu">Menu</a>
+        <a href="#" class="btn-nav" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">Pesan Sekarang</a>
+      </div>
+    </nav>
+
+    <div class="container">
+      <section class="hero">
+        <div>
+          <h2>Kenangan Manis Dimulai dari Sebuah Cangkir</h2>
+          <p>
+            Nikmati racikan kopi susu premium kami — creamy, seimbang, dan cocok untuk menemani setiap momen. Dari pagi yang sibuk sampai sore santai, kami selalu ada untuk jadi bagian dari kenanganmu.
+          </p>
+          <div style="margin-top: 20px;">
+            <button class="btn btn-primary" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">Pesan Sekarang</button>
+            <button class="btn btn-outline">Lihat Menu</button>
+          </div>
+        </div>
+        
+        <div class="hero-img-wrapper">
+          <img src="assets/hero-bg.jpg" alt="Hero Kopi" class="hero-img" onerror="this.src='https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=800'"/>
+          
+          <div class="promo-badge">
+            <div>
+              <div style="font-weight: 700; font-size: 14px;">Kopi Susu Signature</div>
+              <div style="font-size: 12px; color: var(--muted-text);">Creamy • Biji Premium</div>
+            </div>
+            <div style="font-weight: 700; color: var(--accent-brown);">Rp 28.000</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="about-section">
+        <div class="about-container">
+          <div>
+            <img src="assets/about-bg.jpg" alt="Tentang Kami" class="about-img" onerror="this.src='https://images.unsplash.com/photo-1556740758-90de374c12ad?q=80&w=800'"/>
+          </div>
+          
+          <div style="text-align: left;">
+            <span class="subtitle">CERITA KAMI</span>
+            <h2 class="about-title">Lebih dari Sekadar Kopi</h2>
+            <p class="about-desc">
+              Kopi Kenangan bermula dari keinginan sederhana: menyajikan kopi berkualitas tinggi dengan harga yang bersahabat. Kami percaya setiap cangkir kopi memiliki cerita, dan kami ingin menjadi bagian dari cerita harimu.
+            </p>
+            <p class="about-desc">
+              Menggunakan biji kopi lokal pilihan dan gula aren asli Indonesia, kami meracik kenangan yang tak terlupakan di lidah.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="menu" class="menu-section">
+        <div class="section-header">
+          <h2 class="about-title" style="margin-bottom: 10px;">Menu Favorit</h2>
+          <p style="color: var(--muted-text)">Pilihan terbaik untuk menemani harimu</p>
+        </div>
+
+        <div class="menu-grid" id="productGrid">
+          </div>
+      </section>
+
+      <footer>
+        &copy; <span id="year"></span> Kopi Kenangan. Dibuat dengan sepenuh hati.
+      </footer>
+    </div>
+
+    <div id="detailModal" class="modal-backdrop">
+      <div class="modal-content">
+        <button class="close-btn" onclick="closeDetailModal()">✕</button>
+        
+        <img id="d-img" class="detail-img-large" src="" alt="Detail Produk">
+        <h2 id="d-name" style="color: var(--primary-text);">Nama Produk</h2>
+        <h3 id="d-price" style="color: var(--accent-brown); margin-top: 5px;">Rp 0</h3>
+        <p id="d-desc" class="detail-desc">Deskripsi produk...</p>
+        
+        <button class="btn btn-primary" style="width: 100%" onclick="transferToOrder()">Pesan Sekarang</button>
+      </div>
+    </div>
+
+    <div id="orderModal" class="modal-backdrop">
+      <div class="modal-content">
+        <button class="close-btn" onclick="closeOrderModal()">✕</button>
+        <h3 style="margin-bottom: 20px; text-align: center; color: var(--accent-brown);">Form Pemesanan</h3>
+        
+        <form onsubmit="submitOrder(event)">
+          <div class="form-group">
+            <label style="font-size: 13px; font-weight: 600;">Nama Lengkap</label>
+            <input type="text" id="orderName" class="form-input" placeholder="Nama Anda" required />
+          </div>
+          <div class="form-group">
+            <label style="font-size: 13px; font-weight: 600;">Menu Pilihan</label>
+            <select id="orderSelect" class="form-input"></select>
+          </div>
+          <div class="form-group">
+            <label style="font-size: 13px; font-weight: 600;">Jumlah</label>
+            <input type="number" id="orderQty" class="form-input" value="1" min="1" required />
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Kirim Pesanan</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      // DATA PRODUK (6 ITEM DENGAN GAMBAR LOKAL)
+      const products = [
+        {
+          id: 1,
+          name: "Kopi Susu Signature",
+          price: 28000,
+          img: "assets/kopi_susu.jpeg", 
+          description: "Perpaduan klasik antara espresso premium, susu segar, dan sedikit rasa manis yang menciptakan kopi susu creamy dan seimbang."
+        },
+        {
+          id: 2,
+          name: "Es Kopi Gula Aren",
+          price: 30000,
+          img: "assets/kopi_aren.jpeg",
+          description: "Kopi susu kekinian dengan gula aren asli yang memberikan rasa manis legit yang khas dan aroma yang menggoda."
+        },
+        {
+          id: 3,
+          name: "Cappuccino Kenangan",
+          price: 32000,
+          img: "assets/cappucino.jpeg",
+          description: "Espresso kuat dengan lapisan foam susu tebal yang lembut. Cocok bagi pecinta kopi yang menyukai tekstur creamy."
+        },
+        {
+          id: 4,
+          name: "Latte Kenangan",
+          price: 30000,
+          img: "assets/latte.jpeg",
+          description: "Campuran espresso dan steamed milk dengan rasio susu yang lebih banyak, menghasilkan rasa yang sangat lembut."
+        },
+        {
+          id: 5,
+          name: "Macha Cinta",
+          price: 34000,
+          img: "assets/macha.jpeg",
+          description: "Perpaduan matcha premium Jepang dengan susu segar. Memberikan rasa unik, sedikit pahit namun manis dan menyegarkan."
+        },
+        {
+          id: 6,
+          name: "Es Kopi Susu Viral",
+          price: 26000,
+          img: "assets/es_kopi_susu.jpeg",
+          description: "Varian kopi susu yang sedang hits dengan racikan rahasia yang bikin nagih. Wajib coba!"
+        }
+      ];
+
+      const formatRupiah = (num) => "Rp " + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      document.getElementById('year').innerText = new Date().getFullYear();
+
+      // RENDER PRODUK
+      const grid = document.getElementById('productGrid');
+      const select = document.getElementById('orderSelect');
+
+      products.forEach(p => {
+        // Dropdown option
+        const option = document.createElement('option');
+        option.value = p.id;
+        option.innerText = `${p.name} - ${formatRupiah(p.price)}`;
+        select.appendChild(option);
+
+        // Product Card
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+          <img src="${p.img}" alt="${p.name}" class="product-img" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
+          <div style="flex-grow: 1;">
+            <div class="product-name">${p.name}</div>
+            <div class="product-price">${formatRupiah(p.price)}</div>
+          </div>
+          <div class="card-actions">
+            <button class="btn-detail" onclick="openDetailModal(${p.id})">Detail</button>
+            <button class="btn-pesan-card" onclick="openOrderModal(${p.id})">Pesan</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      // MODAL LOGIC
+      const detailModal = document.getElementById('detailModal');
+      const orderModal = document.getElementById('orderModal');
+      let currentProductId = null;
+
+      function openDetailModal(id) {
+        const p = products.find(x => x.id === id);
+        if(!p) return;
+        currentProductId = id;
+        document.getElementById('d-img').src = p.img;
+        document.getElementById('d-img').onerror = function() { this.src='https://via.placeholder.com/300?text=No+Image'; };
+        document.getElementById('d-name').innerText = p.name;
+        document.getElementById('d-price').innerText = formatRupiah(p.price);
+        document.getElementById('d-desc').innerText = p.description;
+        detailModal.classList.add('active');
+      }
+
+      function closeDetailModal() { detailModal.classList.remove('active'); }
+
+      function transferToOrder() {
+        closeDetailModal();
+        setTimeout(() => openOrderModal(currentProductId), 300);
+      }
+
+      function openOrderModal(id = null) {
+        if(id) document.getElementById('orderSelect').value = id;
+        orderModal.classList.add('active');
+      }
+
+      function closeOrderModal() { orderModal.classList.remove('active'); }
+
+      function submitOrder(e) {
+        e.preventDefault();
+        const name = document.getElementById('orderName').value;
+        const qty = document.getElementById('orderQty').value;
+        const pId = document.getElementById('orderSelect').value;
+        const product = products.find(p => p.id == pId);
+
+        if(!name || !product) return;
+        
+        const total = product.price * qty;
+        alert(`Terima kasih kak ${name}!\n\nPesanan: ${product.name} (x${qty})\nTotal: ${formatRupiah(total)}\n\nPesanan akan segera kami proses.`);
+        closeOrderModal();
+        e.target.reset();
+      }
+
+      // Navbar Scroll Effect
+      window.addEventListener('scroll', () => {
+        const nav = document.getElementById('navbar');
+        if(window.scrollY > 50) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+      });
+
+      // Close modal on outside click
+      window.onclick = function(e) {
+        if(e.target == detailModal) closeDetailModal();
+        if(e.target == orderModal) closeOrderModal();
+      }
+    </script>
+  </body>
+</html>
